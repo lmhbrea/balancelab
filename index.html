@@ -6,22 +6,36 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>TTK Calculator v0.1</h1>
+    <div class="container">
 
-    <div class="input-group">
-        <label>Damage: <input type="number" id="damage" value="100"></label>
-        <label>RPM: <input type="number" id="rpm" value="600"></label>
-        <label>Target HP: <input type="number" id="hp" value="1000"></label>
+        <h1>TTK Calculator v0.1</h1>
+
+        <div class="input-group">
+            <label>
+                Damage:
+                <input type="number" id="damage" value="100">
+            </label>
+
+            <label>
+                RPM:
+                <input type="number" id="rpm" value="600">
+            </label>
+
+            <label>
+                Target HP:
+                <input type="number" id="hp" value="1000">
+            </label>
+        </div>
+
+        <button id="calculate-btn">Calculate</button>
+
+        <div id="result"></div>
+
+        <hr>
+
+        <button id="pro-feature-btn">Pro Feature Coming Soon</button>
+
     </div>
-
-    <button id="calculate-btn">Calculate</button>
-
-    <div id="result"></div>
-
-    <hr>
-
-    <!-- Pro Feature 버튼만 추가, 기존 구조 절대 변경 없음 -->
-    <button id="pro-feature-btn">Pro Feature Coming Soon</button>
 
     <script src="script.js"></script>
 </body>
