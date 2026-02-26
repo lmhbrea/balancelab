@@ -1,19 +1,43 @@
-// 기존 TTK 계산기 기능 그대로
-document.getElementById("calculate-btn").addEventListener("click", function() {
-    const damage = Number(document.getElementById("damage").value);
-    const rpm = Number(document.getElementById("rpm").value);
-    const hp = Number(document.getElementById("hp").value);
+// DOM 요소
+const damageInput = document.getElementById('damage');
+const rpmInput = document.getElementById('rpm');
+const hpInput = document.getElementById('hp');
+const calculateBtn = document.getElementById('calculate-btn');
+const resetBtn = document.getElementById('reset-btn');
+const resultDiv = document.getElementById('result');
+const proBtn = document.getElementById('pro-feature-btn');
 
-    const dps = (damage * (rpm/60)).toFixed(2);
-    const ttk = (hp / dps).toFixed(2);
-    const shots = Math.ceil(hp / damage);
+// 계산 함수
+function calculateTTK() {
+    const damage = parseFloat(damageInput.value);
+    const rpm = parseFloat(rpmInput.value);
+    const hp = parseFloat(hpInput.value);
 
-    document.getElementById("result").innerHTML =
-        `Shots: ${shots} | TTK: ${ttk}s | DPS: ${dps}`;
+    if (damage <= 0 || rpm <= 0 || hp <= 0) {
+        resultDiv.innerText = "Enter positive numbers only.";
+        return;
+    }
+
+    const dps = (damage * rpm) / 60;
+    const ttk = hp / dps;
+
+    resultDiv.innerText = `DPS: ${dps.toFixed(2)}, TTK: ${ttk.toFixed(2)} sec`;
+}
+
+// 이벤트 연결
+calculateBtn.addEventListener('click', calculateTTK);
+
+// Reset 버튼 이벤트
+resetBtn.addEventListener('click', () => {
+    damageInput.value = 100;
+    rpmInput.value = 600;
+    hpInput.value = 1000;
+    resultDiv.innerText = "";
 });
 
-// Pro Feature 버튼 클릭 → Google Form 연결만, 기존 구조/스타일 절대 변경 없음
-document.getElementById("pro-feature-btn").addEventListener("click", function() {
-    console.log("Pro Feature clicked");
-    window.open("https://docs.google.com/forms/d/1qVgXJQ1-KWg19L63zm6FkKsmVI0Fp6f8ZOd3Lfa3x0Y/viewform?usp=sharing", "_blank");
+// Pro Feature 클릭 (Revenue Signal)
+proBtn.addEventListener('click', () => {
+    console.log("Pro Feature button clicked"); // 로컬 확인용
+    alert("Thanks for your interest in Pro Feature!");
+    // Google Form 연동은 기존 그대로
 });
